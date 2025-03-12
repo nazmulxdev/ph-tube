@@ -13,7 +13,7 @@
   <!-- custom css class-->
 
   <style>
-    .active{
+    .active {
       background-color: #FF1F3D;
       color: white;
     }
@@ -31,7 +31,7 @@
           <path d="m21 21-4.3-4.3"></path>
         </g>
       </svg>
-      <input type="search" required placeholder="Search" />
+      <input id="search-bar" type="search" required placeholder="Search" />
     </label>
     <button class="btn bg-[#25252520] border-none">sort by view</button>
   </nav>
@@ -45,13 +45,33 @@
 
 
 
-  <section id="video-card-conatiner" class="max-w-screen-2xl mx-auto grid grid-cols-4 gap-6 justify-center items-center">
+  <section id="video-card-conatiner"
+    class="max-w-screen-2xl mx-auto grid grid-cols-4 gap-6 justify-center items-center">
     <div id="no-content-sign" class="col-span-full">
       <img class="mx-auto mt-32 mb-5 w-1/4" src="assets/Icon.png" alt="">
       <p class="font-bold text-5xl text-center">Oops!! Sorry, There is no content here</p>
     </div>
 
   </section>
+
+
+  <!-- You can open the modal using ID.showModal() method -->
+  <dialog id="video_details" class="modal">
+    <div class="modal-box w-10/12 max-w-5xl">
+      <div id="video-details-by-id">
+        
+      </div>
+
+
+
+      <div class="modal-action">
+        <form method="dialog">
+          <!-- if there is a button, it will close the modal -->
+          <button class="btn bg-slate-300 hover:bg-[#FF1F3D] hover:text-white">Close</button>
+        </form>
+      </div>
+    </div>
+  </dialog>
 
 
   <!-- java script -->

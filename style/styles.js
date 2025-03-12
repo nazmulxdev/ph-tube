@@ -17,15 +17,15 @@ const displayCategories = (videoCategories) => {
     <button id="btn-${element["category_id"]}" onclick="loadCategoryVideo(${element["category_id"]})" class="filter-button btn bg-[#25252520] border-none hover:bg-[#FF1F3D] hover:text-white">${element.category}</button>
     `;
     categoryContainer.append(categoryButton);
-  
-    console.log(categoryButton);
+
+    // console.log(categoryButton);
   });
 }
 
 
 
-const loadVideo = () => {
-  fetch("https://openapi.programming-hero.com/api/phero-tube/videos")
+const loadVideo = (searchText = "") => {
+  fetch(`https://openapi.programming-hero.com/api/phero-tube/videos?title=${searchText}`)
     .then(res => res.json())
     .then(data => displayVideos(data.videos))
 }
@@ -53,7 +53,9 @@ const displayVideos = (videos) => {
   }
   for (let vid of videos) {
     const cardDiv = document.createElement("div");
-
+    // console.log(vid["video_id"])
+    const idOfVideo = vid["video_id"];
+    // console.log(typeof idOfVideo);
     cardDiv.innerHTML = `
     <div class="card bg-base-100 ">
     <figure class="rounded-md relative">
@@ -74,7 +76,7 @@ const displayVideos = (videos) => {
     <p>${vid.others.views} views</p>
     </div>
     </div>
-    <div><button class="mx-auto mt-4 btn w-[100%]">Show Details</button></div>
+    <div><button onclick="loadVideoDetails('${idOfVideo}')" class="mx-auto mt-4 btn w-[100%]">Show Details</button></div>
     </div>
     `
 
@@ -83,14 +85,47 @@ const displayVideos = (videos) => {
 }
 
 
-categoryContainer.addEventListener("click", (event) => {
-  const buttonCollection=document.getElementsByClassName("filter-button");
-  console.log(buttonCollection);
-  console.log(event.target);
-for(let btn of buttonCollection){
-  btn.classList.remove("active");
-  event.target.classList.add("active")
+const loadVideoDetails = (videoId) => {
+  const videoIdUrl = `https://openapi.programming-hero.com/api/phero-tube/video/${videoId}`
+  fetch(videoIdUrl)
+    .then(res => res.json())
+    .then(data => displayVideoDetails(data.video));
 }
+
+const displayVideoDetails = (details) => {
+  console.log(details);
+  document.getElementById("video_details").showModal();
+
+
+  const divModal = document.getElementById("video-details-by-id");
+  divModal.innerHTML = `
+  <div class="card bg-base-100 image-full">
+  <figure>
+    <img class="w-full h-[12.5rem] object-cover"
+      src=${details.thumbnail} />
+  </figure>
+  <div class="card-body flex flex-col justify-center items-center mt-24 p-24">
+  <div class="avatar">
+  <div class="w-24 rounded-full">
+    <img src=${details.authors[0].profile_picture} />
+  </div>
+</div>
+    <h2 class="card-title">${details.authors[0].profile_name}</h2>
+    <h2 class="card-title">${details.title}</h2>
+    <p>${details.description}</p>
+  </div>
+</div>
+  `
+}
+
+categoryContainer.addEventListener("click", (event) => {
+  const buttonCollection = document.getElementsByClassName("filter-button");
+  // console.log(buttonCollection);
+  // console.log(event.target);
+  for (let btn of buttonCollection) {
+    btn.classList.remove("active");
+    event.target.classList.add("active")
+  }
 
 
   if (event.target.innerText === "All") {
@@ -99,12 +134,17 @@ for(let btn of buttonCollection){
     loadVideo();
   }
 
-  if(event.target.id==="categoryFilter"){
+  if (event.target.id === "categoryFilter") {
     event.target.classList.remove("active");
   }
 })
 
+document.getElementById("search-bar").addEventListener("keyup", (event) => {
+  const inputText = event.target.value;
+  loadVideo(inputText);
 
+
+})
 
 
 
