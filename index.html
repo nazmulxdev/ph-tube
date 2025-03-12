@@ -1,21 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PH-TUBE</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PH-TUBE</title>
 
-    <!-- daisy UI cdn -->
-    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <!-- daisy UI cdn -->
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+  <!-- custom css class-->
+
+  <style>
+  </style>
 </head>
+
 <body>
-     
+  <!-- nav  bar -->
+  <nav class="max-w-screen-2xl mx-auto pt-8 pb-8 flex justify-between items-center border-b-2 border-[#17171720]">
+    <img src="assets/Logo.png" alt="">
+    <label class="input">
+      <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <g stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" fill="none" stroke="currentColor">
+          <circle cx="11" cy="11" r="8"></circle>
+          <path d="m21 21-4.3-4.3"></path>
+        </g>
+      </svg>
+      <input type="search" required placeholder="Search" />
+    </label>
+    <button class="btn bg-[#25252520] border-none">sort by view</button>
+  </nav>
+
+  <!-- filter button -->
+
+  <div id="categoryFilter" class="flex justify-center items-center gap-4 p-8">
+    <button class="btn bg-[#25252520] border-none hover:bg-[#FF1F3D] hover:text-white">All</button>
+  </div>
+  <!-- video card section -->
 
 
 
+  <section id="video-card-conatiner" class="max-w-screen-2xl mx-auto grid grid-cols-4 gap-6 justify-center items-center">
+    <div id="no-content-sign" class="col-span-full">
+      <img class="mx-auto mt-32 mb-5 w-1/4" src="assets/Icon.png" alt="">
+      <p class="font-bold text-5xl text-center">Oops!! Sorry, There is no content here</p>
+    </div>
 
-    <!-- java script -->
-    <script src="style/styles.js"></script>
+  </section>
+
+
+  <!-- java script -->
+  <script src="style/styles.js"></script>
 </body>
+
 </html>
